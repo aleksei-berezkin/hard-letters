@@ -97,17 +97,13 @@ export async function main() {
         document.body.style.backgroundImage = `url(${imgUrl})`
         descOverlay.innerHTML = picDesc
 
-        const isWin = navigator.userAgent.toLowerCase().includes('win')
-
-        const msg = new SpeechSynthesisUtterance(picDescSpoken ?? picDesc);
-        msg.lang = 'ru-RU'; // Language
-        msg.pitch = isWin ? 1.1 : 1;      // Pitch (0 to 2)
-        msg.rate = isWin ? .85 : .3;      // Rate (0.1 to 10)
-        msg.volume = 1;     // Volume (0 to 1)
-        window.speechSynthesis.speak(msg);
+        speak(picDescSpoken ?? picDesc)
 
         await delay(7000)
     }
+
+    speak('Молодец')
+    descOverlay.innerHTML = '👍'
 }
 
 
@@ -120,4 +116,15 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+function speak(text) {
+    const isWin = navigator.userAgent.toLowerCase().includes('win')
+
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = 'ru-RU';            // Language
+    msg.pitch = isWin ? 1.1 : 1;   // Pitch (0 to 2)
+    msg.rate = isWin ? .85 : .55;  // Rate (0.1 to 10)
+    msg.volume = 1;                // Volume (0 to 1)
+    window.speechSynthesis.speak(msg);
 }
