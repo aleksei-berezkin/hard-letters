@@ -31,7 +31,6 @@ const pics = [
     [2080138, 'Горы'],
     [5129717, 'Река'],
     [4047523, 'Радуга'],
-    [3184260, 'Ворона'],
     [2641195, 'Коровы'],
     [140589, 'Ферма'],
     [1804481, 'Город'],
@@ -49,7 +48,6 @@ const pics = [
     [685704, 'Огурец'],
     [2282101, 'Помидор'],
     [1972744, 'Сыр'],
-    [447165, 'Йогурт'],
     // Art
     [3373844, 'Карандаши'],
     [7917562, 'Рисунок'],
@@ -99,10 +97,12 @@ export async function main() {
         mainImg.className = animation
         descOverlay.innerHTML = picDesc
 
+        const isWin = navigator.userAgent.toLowerCase().includes('win')
+
         const msg = new SpeechSynthesisUtterance(picDescSpoken ?? picDesc);
         msg.lang = 'ru-RU'; // Language
-        msg.pitch = 1;      // Pitch (0 to 2)
-        msg.rate = .3;      // Rate (0.1 to 10)
+        msg.pitch = isWin ? 1.1 : 1;      // Pitch (0 to 2)
+        msg.rate = isWin ? .85 : .3;      // Rate (0.1 to 10)
         msg.volume = 1;     // Volume (0 to 1)
         window.speechSynthesis.speak(msg);
 
