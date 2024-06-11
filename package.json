@@ -1,0 +1,11 @@
+{
+  "name": "hard-letters",
+  "version": "1.0.0",
+  "description": "Speech exercises for kids",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aleksei Berezkin",
+  "license": "ISC"
+}
