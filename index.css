@@ -91,12 +91,28 @@ body {
     bottom: 1em;
 }
 
-#click-for-sound {
+#select-lesson {
     font-size: 3em;
     cursor: default;
     position: absolute;
-    top: calc(50% - 2em);
+    top: 50vh;
+    transform: translateY(-50%);
 }
+
+#select-lesson > a {
+    display: block;
+    text-decoration: none;
+}
+
+#select-lesson > a:visited {
+    color: unset;
+}
+
+#select-lesson > a:hover {
+    color: #0026aa;
+    text-decoration: underline;
+}
+
 
 .overlay-text {
     font-family: Arial, Helvetica, sans-serif;

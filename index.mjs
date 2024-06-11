@@ -1,4 +1,4 @@
-const pics = [
+const lesson0 = [
     // Transport & machines
     [1534685, 'Кран'],
     [2587571, 'Робот'],
@@ -58,6 +58,16 @@ const pics = [
     [4163321, 'Барабан'],
 ]
 
+const lesson1 = [
+    [1975790, 'Тигр'],
+    [2534995, 'Хорёк'],
+    [6871341, 'Зубр'],
+    [7572734, 'Зебра'],
+    [7312959, 'Жираф'],
+]
+
+const lessons = [lesson0, lesson1]
+
 const animations = [
     'enlarge-animation',
     'reduce-animation',
@@ -71,11 +81,12 @@ const apiBase = 'https://pixabay.com/api/'
 const mainImg = document.getElementById('main-img')
 const descOverlay = document.getElementById('description-overlay')
 
-export async function main() {
-    shuffleArray(pics);
+export async function runLesson(lessonId) {
+    const lesson = lessons[lessonId]
+    shuffleArray(lesson);
     shuffleArray(animations);
-    for (let i = 0; i < pics.length; i++){
-        const [picId, picDesc, picDescSpoken] = pics[i];
+    for (let i = 0; i < lesson.length; i++){
+        const [picId, picDesc, picDescSpoken] = lesson[i];
         const animation = animations[i % animations.length]
 
         const res = await fetch(
@@ -92,14 +103,16 @@ export async function main() {
         mainImg.src = imgUrl
 
         await new Promise(resolve => mainImg.onload = resolve)
-        mainImg.dataset.picDesc = picDescSpoken ?? picDesc
         mainImg.className = animation
         document.body.style.backgroundImage = `url(${imgUrl})`
         descOverlay.innerHTML = picDesc
 
-        speak(picDescSpoken ?? picDesc)
+        const toSpeak = picDescSpoken ?? picDesc
+        speak(toSpeak)
 
-        await delay(7000)
+        const wordsCount = toSpeak.split(/[- ]/).length
+
+        await delay(5000 + wordsCount * 1000)
     }
 
     speak('Молодец')

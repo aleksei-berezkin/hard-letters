@@ -10,7 +10,10 @@
 <body>
 <div id="app">
     <img id="main-img" alt="" src="" style="visibility: hidden"/>
-    <div id="click-for-sound" class="overlay-text">Click to begin</div>
+    <div id="select-lesson" class="overlay-text">
+        <a id="select-lesson-0" href="">«Р» урок 1</a>
+        <a id="select-lesson-1" href="">«Р» урок 2</a>
+    </div>
     <div id="description-overlay" class="overlay-text"></div>
     <div id="sound-cloud-embed">
 <!--        <iframe id="sound-cloud-iframe" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/564463071&color=%237fb2d6&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/plastic3official" title="Plastic3" target="_blank" style="color: #cccccc; text-decoration: none;">Plastic3</a> · <a href="https://soundcloud.com/plastic3official/sets/happy-kids-pou-game-music" title="Happy Kids. Pou Game Music" target="_blank" style="color: #cccccc; text-decoration: none;">Happy Kids. Pou Game Music</a></div>-->
@@ -18,23 +21,30 @@
     </div>
 </div>
 <script type="module">
-    import { main } from "./index.mjs";
-    document.onclick = async function() {
-        document.onclick = undefined
-        document.getElementById('main-img').style.removeProperty('visibility')
-        document.getElementById('click-for-sound').remove()
-        const widget = SC.Widget('sound-cloud-iframe')
-        widget.setVolume(13)
-        widget.bind(SC.Widget.Events.READY, function() {
-            widget.getSounds(sounds => {
-                if (sounds.length > 3) {
-                    widget.skip(Math.floor(Math.random() * sounds.length - 3))
-                    widget.play()
-                }
-            })
-        });
+    import { runLesson } from "./index.mjs";
 
-        void main();
+    for (let i = 0; i < 2; i++) {
+        const menuItem = document.querySelector(`#select-lesson-${i}`)
+        menuItem.onclick = function(e) {
+            document.getElementById('main-img').style.removeProperty('visibility')
+            document.getElementById('select-lesson').remove()
+
+            const widget = SC.Widget('sound-cloud-iframe')
+            widget.setVolume(13)
+            widget.bind(SC.Widget.Events.READY, function() {
+                widget.getSounds(sounds => {
+                    if (sounds.length > 3) {
+                        widget.skip(Math.floor(Math.random() * sounds.length - 3))
+                        widget.play()
+                    }
+                })
+            });
+
+            e.stopPropagation()
+            e.preventDefault()
+
+            void runLesson(i);
+        }
     }
 </script>
 </body>
