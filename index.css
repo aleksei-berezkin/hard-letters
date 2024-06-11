@@ -17,7 +17,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    --tx: 7000ms
+    --tx: 8000ms
 }
 
 img, picture, video, canvas, svg {
@@ -128,7 +128,7 @@ body {
 
 @keyframes enlarge {
     0% {
-        transform: scale(1);
+        transform: scale(.99);
     }
     100% {
         transform: scale(1.07);
@@ -137,27 +137,27 @@ body {
 
 @keyframes reduce {
     0% {
-        transform: scale(1);
+        transform: scale(1.05);
     }
     100% {
-        transform: scale(.95);
+        transform: scale(.97);
     }
 }
 
 @keyframes slide-x {
     0% {
-        transform: translateX(-1.2em);
+        transform: translateX(-1.25em);
     }
     100% {
-        transform: translateX(+1.2em);
+        transform: translateX(+1.25em);
     }
 }
 
 @keyframes slide-y {
     0% {
-        transform: translateY(-1.2em);
+        transform: translateY(-1.25em);
     }
     100% {
-        transform: translateY(+1.2em);
+        transform: translateY(+1.25em);
     }
 }

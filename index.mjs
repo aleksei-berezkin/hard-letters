@@ -89,12 +89,12 @@ export async function main() {
         )
         const j = await res.json()
         const imgUrl = j['hits'][0]['largeImageURL']
-        document.body.style.backgroundImage = `url(${imgUrl})`
         mainImg.src = imgUrl
 
         await new Promise(resolve => mainImg.onload = resolve)
         mainImg.dataset.picDesc = picDescSpoken ?? picDesc
         mainImg.className = animation
+        document.body.style.backgroundImage = `url(${imgUrl})`
         descOverlay.innerHTML = picDesc
 
         const isWin = navigator.userAgent.toLowerCase().includes('win')
