@@ -34,12 +34,13 @@ export async function runLesson(lessonId) {
         const [picId, picDesc, picDescSpoken] = lesson[i];
         const animation = animations[i % animations.length]
 
+        const isLocalhost = document.location.hostname === 'localhost';
         const res = await fetch(
             `${apiBase}?key=${apiKey}&id=${picId}`,
             {
                 method: 'GET',
-                headers: {
-                    // 'Cache-Control': 'max-age=86400'
+                headers: isLocalhost ? {} : {
+                    'Cache-Control': 'max-age=86400',
                 }
             }
         )
