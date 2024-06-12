@@ -13,6 +13,7 @@
     <div id="select-lesson" class="overlay-text">
         <a id="select-lesson-0" href="">«Р» урок 1: машины, пейзажи, еда, творчество</a>
         <a id="select-lesson-1" href="">«Р» урок 2: дикая природа, города и страны</a>
+        <a id="select-lesson-2" href="">«Л» урок 1: действия в прошедшем времени</a>
     </div>
     <div id="description-overlay" class="overlay-text"></div>
     <div id="sound-cloud-embed">
@@ -25,11 +26,12 @@
     import {playMusic, runLesson} from './index.mjs';
     import {lessons} from './lessons.mjs';
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
         const menuItem = document.querySelector(`#select-lesson-${i}`)
 
         const wordCount = lessons[i].length
-        menuItem.innerText += ` — ${wordCount} ${wordCount % 10 === 1 ? 'слово' : wordCount % 10 <= 4 ? 'слова' : 'слов'}`
+        const rem = wordCount % 10
+        menuItem.innerText += ` — ${wordCount} ${rem === 1 ? 'слово' : ([2, 3, 4].includes(rem) ? 'слова' : 'слов')}`
 
         menuItem.onclick = function(e) {
             e.stopPropagation()
