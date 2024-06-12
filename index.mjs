@@ -16,8 +16,8 @@ export function playMusic() {
 const animations = [
     'enlarge-animation',
     'reduce-animation',
-    'slide-animation-x',
-    'slide-animation-y',
+    'slide-1-animation',
+    'slide-2-animation',
 ]
 
 const apiKey = '44310474-bd3c2d1e29e617c54c09f0b06'
@@ -48,7 +48,7 @@ export async function runLesson(lessonId) {
         mainImg.src = imgUrl
 
         await new Promise(resolve => mainImg.onload = resolve)
-        mainImg.className = animation
+        mainImg.className = animation + (animation.startsWith('slide') && Math.random() < .5 ? ' reverse-animation' : '');
         document.body.style.backgroundImage = `url(${imgUrl})`
         descOverlay.innerHTML = picDesc
 

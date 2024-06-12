@@ -17,7 +17,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    --tx: 8000ms
+    --tx: 9000ms;
+    --tx-1: 18px;
+    --tx-2: 32px;
 }
 
 img, picture, video, canvas, svg {
@@ -134,12 +136,16 @@ body {
     animation: reduce var(--tx) linear forwards;
 }
 
-.slide-animation-x {
-    animation: slide-x var(--tx) linear forwards;
+.slide-1-animation {
+    animation: slide-1 var(--tx) linear forwards;
 }
 
-.slide-animation-y {
-    animation: slide-y var(--tx) linear forwards;
+.slide-2-animation {
+    animation: slide-2 var(--tx) linear forwards;
+}
+
+.reverse-animation {
+    animation-direction: reverse;
 }
 
 @keyframes enlarge {
@@ -147,7 +153,7 @@ body {
         transform: scale(.99);
     }
     100% {
-        transform: scale(1.07);
+        transform: scale(1.09);
     }
 }
 
@@ -156,24 +162,24 @@ body {
         transform: scale(1.05);
     }
     100% {
-        transform: scale(.97);
+        transform: scale(.95);
     }
 }
 
-@keyframes slide-x {
+@keyframes slide-1 {
     0% {
-        transform: translateX(-1.25em);
+        transform: translate3d(calc(-1 * var(--tx-1)), calc(-1 * var(--tx-1)), 0);
     }
     100% {
-        transform: translateX(+1.25em);
+        transform: translate3d(var(--tx-2), var(--tx-2), 0);
     }
 }
 
-@keyframes slide-y {
+@keyframes slide-2 {
     0% {
-        transform: translateY(-1.25em);
+        transform: translate3d(calc(-1 * var(--tx-1)), var(--tx-1), 0);
     }
     100% {
-        transform: translateY(+1.25em);
+        transform: translate3d(var(--tx-2), calc(-1 * var(--tx-2)), 0);
     }
 }
