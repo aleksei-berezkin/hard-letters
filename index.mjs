@@ -57,7 +57,7 @@ export async function runLesson(lessonId) {
 
         const wordsCount = toSpeak.split(/[- ]/).length
 
-        await delay(5000 + wordsCount * 1000)
+        await delay(4500 + wordsCount * 1000)
     }
 
     speak('Молодец')

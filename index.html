@@ -11,8 +11,8 @@
 <div id="app">
     <img id="main-img" alt="" src="" style="visibility: hidden"/>
     <div id="select-lesson" class="overlay-text">
-        <a id="select-lesson-0" href="">«Р» урок 1</a>
-        <a id="select-lesson-1" href="">«Р» урок 2</a>
+        <a id="select-lesson-0" href="">«Р» урок 1: машины, пейзажи, еда, творчество</a>
+        <a id="select-lesson-1" href="">«Р» урок 2: дикая природа, города и страны</a>
     </div>
     <div id="description-overlay" class="overlay-text"></div>
     <div id="sound-cloud-embed">
@@ -21,10 +21,15 @@
     </div>
 </div>
 <script type="module">
-    import {playMusic, runLesson} from "./index.mjs";
+    import {playMusic, runLesson} from './index.mjs';
+    import {lessons} from './lessons.mjs';
 
     for (let i = 0; i < 2; i++) {
         const menuItem = document.querySelector(`#select-lesson-${i}`)
+
+        const wordCount = lessons[i].length
+        menuItem.innerText += ` — ${wordCount} ${wordCount % 10 === 1 ? 'слово' : wordCount % 10 <= 4 ? 'слова' : 'слов'}`
+
         menuItem.onclick = function(e) {
             e.stopPropagation()
             e.preventDefault()
