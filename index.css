@@ -37,6 +37,23 @@ p, h1, h2, h3, h4, h5, h6 {
 
 /* End CSS reset */
 
+a {
+    --a-color: #002a71;
+    color: var(--a-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:visited {
+    color: var(--a-color);
+}
+
+a:hover {
+    color: #0f50af;
+    text-decoration: underline;
+}
+
+
 body {
     background-size: cover;
     background-position: 50% 50%;
@@ -72,6 +89,7 @@ body {
     opacity: 50%;
     transition: opacity 0.3s;
 }
+
 #sound-cloud-embed > iframe {
     border: none;
     height: 80px;
@@ -89,6 +107,7 @@ body {
 }
 
 #description-overlay {
+    font-size: 2em;
     position: absolute;
     bottom: 1em;
 }
@@ -103,22 +122,17 @@ body {
 
 #select-lesson > a {
     display: block;
-    text-decoration: none;
 }
 
-#select-lesson > a:visited {
-    color: unset;
+#attribution {
+    bottom: 1em;
+    font-size: 1.1em;
+    position: absolute;
+    right: 1em;
 }
-
-#select-lesson > a:hover {
-    color: #0026aa;
-    text-decoration: underline;
-}
-
 
 .overlay-text {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2em;
     text-shadow:
             #ffffff 0 0 .5em,
             rgba(255, 255, 255, 0.5) 5px 0 .5em,

@@ -44,7 +44,8 @@ export async function runLesson(lessonId) {
             }
         )
         const j = await res.json()
-        const imgUrl = j['hits'][0]['largeImageURL']
+        const photoObj = j['hits'][0]
+        const imgUrl = photoObj['largeImageURL']
         mainImg.src = imgUrl
 
         await new Promise(resolve => mainImg.onload = resolve)
@@ -52,6 +53,9 @@ export async function runLesson(lessonId) {
         document.body.style.backgroundImage = `url(${imgUrl})`
         descOverlay.innerHTML = picDesc
 
+        const userName = photoObj['user']
+        const userLink = `https://pixabay.com/users/${userName}`
+        document.querySelector('#attribution').innerHTML = `Photo by <a href='${userLink}' target='_blank'>${userName}</a> on <a href='${photoObj['pageURL']}' target='_blank'>Pixabay</a>`
         const toSpeak = picDescSpoken ?? picDesc
         speak(toSpeak)
 
