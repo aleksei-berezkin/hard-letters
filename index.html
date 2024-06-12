@@ -21,27 +21,18 @@
     </div>
 </div>
 <script type="module">
-    import { runLesson } from "./index.mjs";
+    import {playMusic, runLesson} from "./index.mjs";
 
     for (let i = 0; i < 2; i++) {
         const menuItem = document.querySelector(`#select-lesson-${i}`)
         menuItem.onclick = function(e) {
+            e.stopPropagation()
+            e.preventDefault()
+
             document.getElementById('main-img').style.removeProperty('visibility')
             document.getElementById('select-lesson').remove()
 
-            const widget = SC.Widget('sound-cloud-iframe')
-            widget.setVolume(13)
-            widget.bind(SC.Widget.Events.READY, function() {
-                widget.getSounds(sounds => {
-                    if (sounds.length > 3) {
-                        widget.skip(Math.floor(Math.random() * sounds.length - 3))
-                        widget.play()
-                    }
-                })
-            });
-
-            e.stopPropagation()
-            e.preventDefault()
+            playMusic();
 
             void runLesson(i);
         }
