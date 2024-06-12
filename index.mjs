@@ -34,16 +34,7 @@ export async function runLesson(lessonId) {
         const [picId, picDesc, picDescSpoken] = lesson[i];
         const animation = animations[i % animations.length]
 
-        const isLocalhost = document.location.hostname === 'localhost';
-        const res = await fetch(
-            `${apiBase}?key=${apiKey}&id=${picId}`,
-            {
-                method: 'GET',
-                headers: isLocalhost ? {} : {
-                    'Cache-Control': 'max-age=86400',
-                }
-            }
-        )
+        const res = await fetch(`${apiBase}?key=${apiKey}&id=${picId}`)
         const j = await res.json()
         const photoObj = j['hits'][0]
         const imgUrl = photoObj['largeImageURL']
