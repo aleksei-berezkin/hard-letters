@@ -63,7 +63,7 @@ let pauseEndPromise = Promise.resolve()
 let pauseEndResolveFunc = undefined
 let pauseEndedMs = undefined
 
-export function togglePause() {
+export async function togglePause() {
     const playOverlay = document.querySelector('#play-overlay')
     const pauseOverlay = document.querySelector('#pause-overlay')
 
@@ -87,6 +87,13 @@ export function togglePause() {
         playOverlay.style.removeProperty('display')
         pauseOverlay.style.display = 'block'
     }
+
+    setTimeout(function() {
+        // Widged likes to steal the focus
+        if (document.querySelector('#sound-cloud-iframe').contains(document.activeElement)) {
+            document.body.focus()
+        }
+    }, 300)
 }
 
 function playMusic() {
