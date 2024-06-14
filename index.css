@@ -17,12 +17,19 @@ body {
     position: absolute;
 }
 
+@property --alpha {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+}
+
 #github-link > a > svg {
+    filter: drop-shadow(0 0 .4em rgba(0, 0, 0, var(--alpha)));
     height: 1.2em;
-    transition: height 200ms;
+    transition: height 200ms, --alpha 200ms;
 }
 
 #github-link > a > svg:hover {
-    filter: drop-shadow(0 0 .4em rgba(0, 0, 0, .3));
+    --alpha: .4;
     height: 1.3em;
 }
