@@ -17,11 +17,11 @@ const attribution = document.querySelector('#attribution')
 export async function runLesson(lessonId) {
     playMusic()
 
-    const lesson = lessons[lessonId]
-    shuffleArray(lesson);
+    const words = lessons[lessonId].words
+    shuffleArray(words);
     shuffleArray(animations);
-    for (let i = 0; i < lesson.length; i++){
-        const [picId, picDesc, picDescSpoken] = lesson[i];
+    for (let i = 0; i < words.length; i++){
+        const [picId, picDesc, picDescSpoken] = words[i];
         const animation = animations[i % animations.length]
 
         const res = await fetch(`${apiBase}?key=${apiKey}&id=${picId}`)

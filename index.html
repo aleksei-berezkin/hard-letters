@@ -10,11 +10,7 @@
 </head>
 <body>
 
-<div id="select-lesson" class="overlay-text">
-    <a id="select-lesson-0" href="lesson.html?id=0">«Р» урок 1: машины, пейзажи, еда, творчество</a>
-    <a id="select-lesson-1" href="lesson.html?id=1">«Р» урок 2: дикая природа, города и страны</a>
-    <a id="select-lesson-2" href="lesson.html?id=2">«Л» урок 1: прошедшее время</a>
-</div>
+<div id="select-lesson" class="overlay-text"></div>
 
 <div id="github-link">
     <a href="https://github.com/aleksei-berezkin/hard-letters" target="_blank">
@@ -22,16 +18,14 @@
     </a>
 </div>
 
-
 <script type="module">
     import { lessons } from './lessons.mjs';
-
-    for (let i = 0; i < 3; i++) {
-        const menuItem = document.querySelector(`#select-lesson-${i}`)
-
-        const wordCount = lessons[i].length
+    const selectLessons = document.querySelector('#select-lesson')
+    for (let i = 0; i < lessons.length; i++){
+        const name = lessons[i].name
+        const wordCount = lessons[i].words.length
         const rem = wordCount % 10
-        menuItem.innerText += ` — ${wordCount} ${rem === 1 ? 'слово' : ([2, 3, 4].includes(rem) ? 'слова' : 'слов')}`
+        selectLessons.innerHTML += `<a href='lesson.html?id=${i}'>${name} — ${wordCount} ${rem === 1 ? 'слово' : ([2, 3, 4].includes(rem) ? 'слова' : 'слов')}</a>`
     }
 </script>
 </body>
