@@ -103,7 +103,7 @@ function playMusic() {
         await delay(500)
 
         widget.getSounds(async sounds => {
-            widget.setVolume(isWin() ? 10 : 13)
+            widget.setVolume(isWin() ? 6 : 13)
             if (sounds.length > doNotSeekToLastTracks) {
                 widget.skip(Math.floor(Math.random() * (sounds.length - doNotSeekToLastTracks)))
             }
@@ -143,8 +143,8 @@ function shuffleArray(array) {
 function speak(text) {
     const msg = new SpeechSynthesisUtterance(text);
     msg.lang = 'ru-RU'
-    msg.pitch = isWin() ? 1.1 : 1
-    msg.rate = isWin() ? .85 : .55
+    msg.pitch = isWin() ? 1.5 : 1
+    msg.rate = isWin() ? .6 : .55
     msg.volume = 1
     window.speechSynthesis.speak(msg);
 }
