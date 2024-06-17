@@ -68,7 +68,7 @@ export async function togglePause() {
         pauseEndResolveFunc()
         pauseEndedMs = Date.now()
         mainImg.style.animationPlayState = 'running'
-        if (musicWasPlaying) getSCWidget().play()
+        if (musicWasPlaying) getSCWidget()?.play()
 
         playOverlay.classList.remove('display-none')
         pauseOverlay.classList.add('display-none')
@@ -77,7 +77,7 @@ export async function togglePause() {
         pauseEndPromise = new Promise(resolve => pauseEndResolveFunc = resolve)
         pauseEndedMs = undefined
         mainImg.style.animationPlayState = 'paused'
-        getSCWidget().isPaused(p => {
+        getSCWidget()?.isPaused(p => {
             musicWasPlaying = !p
             if (!p) getSCWidget().pause()
         })
@@ -89,7 +89,7 @@ export async function togglePause() {
 
     setTimeout(function() {
         // Widged likes to steal the focus
-        if (document.querySelector('#sound-cloud-iframe').contains(document.activeElement)) {
+        if (getSCWidget()?.contains(document.activeElement)) {
             document.body.focus()
         }
     }, 300)
@@ -107,6 +107,8 @@ async function delayUntilPauseEnd() {
 
 function playMusic() {
     const widget = getSCWidget()
+    if (!widget) return
+
     const doNotSeekToLastTracks = 3
     widget.bind(SC.Widget.Events.READY, async function() {
         await delay(500)
@@ -137,7 +139,10 @@ function playMusic() {
 }
 
 function getSCWidget() {
-    return SC.Widget('sound-cloud-iframe')
+    const iframe = document.querySelector('#sound-cloud-iframe')
+    if (!iframe) return undefined
+
+    return SC.Widget(iframe)
 }
 
 function delay(timeoutMs) {
@@ -166,7 +171,7 @@ async function delayBetweenSlides(wordsCount) {
 
     for ( ; ; ) {
         const baseDelay = getParams().slidesDelay
-        const perWordDelay = baseDelay / 4.5
+        const perWordDelay = Math.min(1000, baseDelay / 4.5)
 
         const endAt = startedAt + baseDelay + wordsCount * perWordDelay
         const remaining = endAt - Date.now()

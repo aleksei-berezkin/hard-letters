@@ -1,5 +1,6 @@
 body {
     --menu-bg: rgba(255, 255, 255, .5);
+    --menu-bg-h: rgba(255, 255, 255, .75);
     --menu-p: 16px;
     --menu-s: 32px;
     --menu-sh: 3px 3px 10px rgba(0, 0, 0, 0.4);
@@ -57,7 +58,7 @@ body {
 }
 
 #menu-btn:hover {
-    --menu-bg: rgba(255, 255, 255, .75);
+    background-color: var(--menu-bg-h);
 }
 
 #menu-btn > svg {
@@ -78,14 +79,22 @@ body {
     display: grid;
     gap: .1em .5em;
     grid-template-columns: auto auto;
-    left: calc(var(--menu-p) * 2 + var(--menu-s));
+    left: var(--menu-p);
     padding: calc(var(--menu-s) / 4);
     position: absolute;
-    top: var(--menu-p);
+    top: calc(var(--menu-p) * 2 + var(--menu-s));
+    transition: transform 200ms, opacity 200ms;
+    transform-origin: 0 0;
+    transform: scale(1)
 }
 
 #params-wrapper input {
     width: 200px;
+}
+
+#params-wrapper.hidden {
+    transform: scale(0);
+    opacity: 0;
 }
 
 #default-wrapper {
