@@ -1,4 +1,5 @@
 import { lessons } from './lessons.mjs';
+import { getParams, onMusicVolumeInput } from './params.mjs';
 
 const animations = [
     'enlarge-animation',
@@ -42,16 +43,9 @@ export async function runLesson(lessonId) {
         const toSpeak = picDescSpoken ?? picDesc
         speak(toSpeak)
 
-        const wordsCount = toSpeak.split(/[- ]/).length
-        await delay(4500 + wordsCount * 1000)
 
-        await pauseEndPromise
-
-        const passedSincePauseEnd = Date.now() - pauseEndedMs
-        const minIntervalAfterPauseEnd = 1000
-        if (pauseEndedMs && passedSincePauseEnd < minIntervalAfterPauseEnd) {
-            await delay(minIntervalAfterPauseEnd - passedSincePauseEnd)
-        }
+        await delayBetweenSlides(toSpeak.split(/[- ]/).length)
+        await delayUntilPauseEnd()
     }
 
     speak('Молодец')
@@ -62,6 +56,7 @@ let paused = false
 let pauseEndPromise = Promise.resolve()
 let pauseEndResolveFunc = undefined
 let pauseEndedMs = undefined
+let musicWasPlaying = undefined
 
 export async function togglePause() {
     const playOverlay = document.querySelector('#play-overlay')
@@ -73,20 +68,24 @@ export async function togglePause() {
         pauseEndResolveFunc()
         pauseEndedMs = Date.now()
         mainImg.style.animationPlayState = 'running'
-        getSCWidget().play()
+        if (musicWasPlaying) getSCWidget().play()
 
-        playOverlay.style.display = 'block'
-        pauseOverlay.style.removeProperty('display')
+        playOverlay.classList.remove('display-none')
+        pauseOverlay.classList.add('display-none')
     } else {
         paused = true
         pauseEndPromise = new Promise(resolve => pauseEndResolveFunc = resolve)
         pauseEndedMs = undefined
         mainImg.style.animationPlayState = 'paused'
-        getSCWidget().pause()
+        getSCWidget().isPaused(p => {
+            musicWasPlaying = !p
+            if (!p) getSCWidget().pause()
+        })
 
-        playOverlay.style.removeProperty('display')
-        pauseOverlay.style.display = 'block'
+        playOverlay.classList.add('display-none')
+        pauseOverlay.classList.remove('display-none')
     }
+
 
     setTimeout(function() {
         // Widged likes to steal the focus
@@ -96,6 +95,16 @@ export async function togglePause() {
     }, 300)
 }
 
+async function delayUntilPauseEnd() {
+    await pauseEndPromise
+
+    const passedSincePauseEnd = Date.now() - pauseEndedMs
+    const minIntervalAfterPauseEnd = 1000
+    if (pauseEndedMs && passedSincePauseEnd < minIntervalAfterPauseEnd) {
+        await delay(minIntervalAfterPauseEnd - passedSincePauseEnd)
+    }
+}
+
 function playMusic() {
     const widget = getSCWidget()
     const doNotSeekToLastTracks = 3
@@ -103,7 +112,9 @@ function playMusic() {
         await delay(500)
 
         widget.getSounds(async sounds => {
-            widget.setVolume(isWin() ? 6 : 13)
+            widget.setVolume(getParams().musicVolume)
+            onMusicVolumeInput(volume => widget.setVolume(volume))
+
             if (sounds.length > doNotSeekToLastTracks) {
                 widget.skip(Math.floor(Math.random() * (sounds.length - doNotSeekToLastTracks)))
             }
@@ -143,12 +154,24 @@ function shuffleArray(array) {
 function speak(text) {
     const msg = new SpeechSynthesisUtterance(text);
     msg.lang = 'ru-RU'
-    msg.pitch = isWin() ? 1.5 : 1
-    msg.rate = isWin() ? .6 : .55
+    msg.pitch = getParams().voicePitch
+    msg.rate = getParams().voiceRate
+    msg.voice = speechSynthesis.getVoices().filter(v => v.lang === 'ru-RU' && v.voiceURI === getParams().voiceURI)[0]
     msg.volume = 1
     window.speechSynthesis.speak(msg);
 }
 
-function isWin() {
-    return navigator.userAgent.toLowerCase().includes('win')
+async function delayBetweenSlides(wordsCount) {
+    const startedAt = Date.now()
+
+    for ( ; ; ) {
+        const baseDelay = getParams().slidesDelay
+        const perWordDelay = baseDelay / 4.5
+
+        const endAt = startedAt + baseDelay + wordsCount * perWordDelay
+        const remaining = endAt - Date.now()
+        if (remaining <= 0) break
+
+        await delay(Math.min(remaining, 200))
+    }
 }

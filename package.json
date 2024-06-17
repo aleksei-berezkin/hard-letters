@@ -1,11 +1,15 @@
 {
+  "author": "Aleksei Berezkin",
   "name": "hard-letters",
-  "version": "1.0.0",
   "description": "Speech exercises for kids",
+  "license": "ISC",
+  "version": "1.0.0",
   "main": "index.html",
   "scripts": {
+    "serve": "npx serve .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Aleksei Berezkin",
-  "license": "ISC"
+  "devDependencies": {
+    "serve": "^14.2.3"
+  }
 }

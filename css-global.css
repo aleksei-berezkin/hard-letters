@@ -54,3 +54,7 @@ a:hover {
     color: var(--hover-color);
     text-decoration-color: var(--hover-color);
 }
+
+.display-none {
+    display: none !important;
+}
