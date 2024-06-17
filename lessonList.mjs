@@ -1,4 +1,4 @@
-export const lessons = [
+export const lessonList = [
     {
         name: '«Р» урок 1: машины, пейзажи, еда, творчество',
         words: [

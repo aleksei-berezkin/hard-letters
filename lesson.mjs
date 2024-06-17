@@ -1,4 +1,4 @@
-import { lessons } from './lessons.mjs';
+import { lessonList } from './lessonList.mjs';
 import { getParams, onMusicVolumeInput } from './params.mjs';
 
 const animations = [
@@ -18,7 +18,7 @@ const attribution = document.querySelector('#attribution')
 export async function runLesson(lessonId) {
     playMusic()
 
-    const words = lessons[lessonId].words
+    const words = lessonList[lessonId].words
     shuffleArray(words);
     shuffleArray(animations);
     for (let i = 0; i < words.length; i++){

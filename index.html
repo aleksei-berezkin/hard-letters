@@ -19,11 +19,11 @@
 </div>
 
 <script type="module">
-    import { lessons } from './lessons.mjs';
+    import { lessonList } from './lessonList.mjs';
     const selectLessons = document.querySelector('#select-lesson')
-    for (let i = 0; i < lessons.length; i++){
-        const name = lessons[i].name
-        const wordCount = lessons[i].words.length
+    for (let i = 0; i < lessonList.length; i++){
+        const name = lessonList[i].name
+        const wordCount = lessonList[i].words.length
         const rem = wordCount % 10
         selectLessons.innerHTML += `<a href='lesson.html?id=${i}'>${name} — ${wordCount} ${rem === 1 ? 'слово' : ([2, 3, 4].includes(rem) ? 'слова' : 'слов')}</a>`
     }
