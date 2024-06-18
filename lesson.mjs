@@ -183,7 +183,7 @@ async function delayBetweenSlides(wordsCount) {
 
     for ( ; ; ) {
         const baseDelay = getParams().slidesDelay
-        const perWordDelay = Math.min(1000, baseDelay / 4.5)
+        const perWordDelay = Math.min(1000, baseDelay / 4)
 
         const endAt = startedAt + baseDelay + wordsCount * perWordDelay
         const remaining = endAt - Date.now()
