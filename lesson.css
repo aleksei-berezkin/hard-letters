@@ -14,16 +14,25 @@ body {
 
 #loading-spinner {
     --s: 15vmin;
-    --deg: calc(100% * pi * (94 / 100) / 360);
 
-    animation: dash-animation 1400ms ease-in-out infinite,
-               rotate-animation 2000ms linear infinite;
     height: var(--s);
     left: calc(50vw - var(--s) / 2);
     position: absolute;
-    stroke: #444;
     top: calc(50vh - var(--s) / 2);
     width: var(--s);
+}
+
+#loading-spinner > circle {
+    --r: 47%;
+    --deg: calc(2 * pi * var(--r) / 360);
+
+    animation: dash-animation 1400ms ease-in-out infinite,
+               rotate-animation 2000ms linear infinite;
+    fill: none;
+    r: var(--r);
+    stroke: #444;
+    stroke-width: calc(100% - 2 * var(--r));
+    transform-origin: 50% 50%;
 }
 
 @keyframes dash-animation {
@@ -48,7 +57,6 @@ body {
 }
 
 #play-pause-overlay {
-
     align-items: center;
     bottom: 0;
     display: flex;

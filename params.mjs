@@ -39,7 +39,7 @@ function getDefaultParams() {
     return {
         slidesDelay: 4500,
         musicVolume: isWin() ? 6 : 13,
-        voicePitch: isWin() ? 1.5 : 1,
+        voicePitch: isWin() ? 1.1 : 1,
         voiceRate: isWin() ? .6 : .55,
     }
 }
