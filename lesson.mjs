@@ -97,7 +97,7 @@ export async function togglePause() {
 
     setTimeout(function() {
         // Widged likes to steal the focus
-        if (getSCWidget()?.contains(document.activeElement)) {
+        if (getSCiframe()?.contains(document.activeElement)) {
             document.body.focus()
         }
     }, 300)
@@ -147,10 +147,14 @@ function playMusic() {
 }
 
 function getSCWidget() {
-    const iframe = document.querySelector('#sound-cloud-iframe')
+    const iframe = getSCiframe()
     if (!iframe) return undefined
 
     return SC.Widget(iframe)
+}
+
+function getSCiframe() {
+    return document.querySelector('#sound-cloud-iframe')
 }
 
 function delay(timeoutMs) {

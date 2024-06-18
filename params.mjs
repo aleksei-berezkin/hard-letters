@@ -3,9 +3,12 @@ const paramKey = 'hard-letters-param'
 
 export async function initParams() {
     await loadParams()
+
     document.querySelector('#params-wrapper').addEventListener('change', () => {
         localStorage.setItem(paramKey, JSON.stringify(getParams()))
+        setTitles()
     })
+
     document.querySelector('#reset-default').addEventListener('click', () => {
         localStorage.removeItem(paramKey)
         loadParams()
@@ -28,6 +31,8 @@ async function loadParams() {
     })
     document.querySelector('#voice-pitch').value = params.voicePitch
     document.querySelector('#voice-rate').value = params.voiceRate
+
+    setTitles()
 }
 
 function getDefaultParams() {
@@ -37,6 +42,14 @@ function getDefaultParams() {
         voicePitch: isWin() ? 1.5 : 1,
         voiceRate: isWin() ? .6 : .55,
     }
+}
+
+function setTitles() {
+    const params = getParams()
+    document.querySelector('#slides-delay').title = params.slidesDelay
+    document.querySelector('#music-volume').title = params.musicVolume
+    document.querySelector('#voice-pitch').title = params.voicePitch
+    document.querySelector('#voice-rate').title = params.voiceRate
 }
 
 async function getVoices() {
