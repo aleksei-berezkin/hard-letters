@@ -32,6 +32,10 @@ export async function runLesson(lessonId) {
         mainImg.src = imgUrl
 
         await new Promise(resolve => mainImg.onload = resolve)
+
+        document.querySelector('#loading-spinner')?.remove()
+        pausePossible = true
+
         mainImg.className = animation + (animation.startsWith('slide') && Math.random() < .5 ? ' reverse-animation' : '');
         document.body.style.backgroundImage = `url(${imgUrl})`
         descOverlay.innerHTML = picDesc
@@ -52,6 +56,8 @@ export async function runLesson(lessonId) {
     descOverlay.innerHTML = '👍'
 }
 
+let pausePossible = false
+
 let paused = false
 let pauseEndPromise = Promise.resolve()
 let pauseEndResolveFunc = undefined
@@ -59,6 +65,8 @@ let pauseEndedMs = undefined
 let musicWasPlaying = undefined
 
 export async function togglePause() {
+    if (!pausePossible) return
+
     const playOverlay = document.querySelector('#play-overlay')
     const pauseOverlay = document.querySelector('#pause-overlay')
 

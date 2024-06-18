@@ -12,6 +12,41 @@ body {
     width: 100%;
 }
 
+#loading-spinner {
+    --s: 15vmin;
+    --deg: calc(100% * pi * (94 / 100) / 360);
+
+    animation: dash-animation 1400ms ease-in-out infinite,
+               rotate-animation 2000ms linear infinite;
+    height: var(--s);
+    left: calc(50vw - var(--s) / 2);
+    position: absolute;
+    stroke: #444;
+    top: calc(50vh - var(--s) / 2);
+    width: var(--s);
+}
+
+@keyframes dash-animation {
+    0% {
+        stroke-dasharray: 0 0 calc(2 * var(--deg)) calc(360 * var(--deg))
+    }
+    50% {
+        stroke-dasharray: 0 calc(90 * var(--deg)) calc(270 * var(--deg)) calc(360 * var(--deg))
+    }
+    100% {
+        stroke-dasharray: 0 calc(358 * var(--deg)) calc(270 * var(--deg)) calc(360 * var(--deg))
+    }
+}
+
+@keyframes rotate-animation {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
 #play-pause-overlay {
 
     align-items: center;
