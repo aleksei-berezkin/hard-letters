@@ -42,7 +42,7 @@ export async function runLesson(lessonId) {
 
         const userName = photoObj['user']
         const userLink = `https://pixabay.com/users/${userName}`
-        attribution.innerHTML = `Photo by <a href='${userLink}' target='_blank'>${userName}</a> on <a href='${photoObj['pageURL']}' target='_blank'>Pixabay</a>`
+        attribution.innerHTML = `Фото <a href='${userLink}' target='_blank'>${userName}</a> на <a href='${photoObj['pageURL']}' target='_blank'>Pixabay</a>`
 
         const toSpeak = picDescSpoken ?? picDesc
         speak(toSpeak)
