@@ -22,7 +22,9 @@ export async function runLesson(lessonId) {
     shuffleArray(words);
     shuffleArray(animations);
     for (let i = 0; i < words.length; i++){
-        const [picId, picDesc, picDescSpoken] = words[i];
+        const picIds = words[i].filter(w => typeof w === 'number')
+        const picId = picIds[Math.floor(Math.random() * picIds.length)]
+        const [picDesc, picDescSpoken] = words[i].filter(w => typeof w === 'string');
         const animation = animations[i % animations.length]
 
         const res = await fetch(`${apiBase}?key=${apiKey}&id=${picId}`)
