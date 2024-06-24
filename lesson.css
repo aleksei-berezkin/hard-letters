@@ -23,27 +23,25 @@ body {
 }
 
 #loading-spinner > circle {
-    --r: 47%;
+    --r: 47px;
     --deg: calc(2 * pi * var(--r) / 360);
 
     animation: dash-animation 1400ms ease-in-out infinite,
                rotate-animation 2000ms linear infinite;
     fill: none;
-    r: var(--r);
     stroke: #444;
-    stroke-width: calc(100% - 2 * var(--r));
     transform-origin: 50% 50%;
 }
 
 @keyframes dash-animation {
     0% {
-        stroke-dasharray: 0 0 calc(2 * var(--deg)) calc(360 * var(--deg))
+        stroke-dasharray: 0 0 calc(2 * var(--deg)) calc(358 * var(--deg))
     }
     50% {
-        stroke-dasharray: 0 calc(90 * var(--deg)) calc(270 * var(--deg)) calc(360 * var(--deg))
+        stroke-dasharray: 0 calc(35 * var(--deg)) calc(290 * var(--deg)) calc(35 * var(--deg))
     }
     100% {
-        stroke-dasharray: 0 calc(358 * var(--deg)) calc(270 * var(--deg)) calc(360 * var(--deg))
+        stroke-dasharray: 0 calc(358 * var(--deg)) calc(2 * var(--deg))
     }
 }
 
