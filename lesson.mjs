@@ -1,5 +1,6 @@
 import { lessonList } from './lessonList.mjs';
 import { getParams, onMusicVolumeInput } from './params.mjs';
+import { getPhoto, shuffleArray } from './util.mjs';
 
 const animations = [
     'enlarge-animation',
@@ -7,9 +8,6 @@ const animations = [
     'slide-1-animation',
     'slide-2-animation',
 ]
-
-const apiKey = '44310474-bd3c2d1e29e617c54c09f0b06'
-const apiBase = 'https://pixabay.com/api/'
 
 const mainImg = document.getElementById('main-img')
 const descOverlay = document.getElementById('description-overlay')
@@ -27,9 +25,7 @@ export async function runLesson(lessonId) {
         const [picDesc, picDescSpoken] = words[i].filter(w => typeof w === 'string');
         const animation = animations[i % animations.length]
 
-        const res = await fetch(`${apiBase}?key=${apiKey}&id=${picId}`)
-        const j = await res.json()
-        const photoObj = j['hits'][0]
+        const photoObj = await getPhoto(picId)
         const imgUrl = photoObj['largeImageURL']
         mainImg.src = imgUrl
 
@@ -161,13 +157,6 @@ function getSCiframe() {
 
 function delay(timeoutMs) {
     return new Promise(resolve => setTimeout(resolve, timeoutMs))
-}
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
 }
 
 function speak(text) {

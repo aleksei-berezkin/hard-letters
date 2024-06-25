@@ -1,20 +1,112 @@
-body {
+#select-lesson {
+    --card-w: 320px;
+    --card-m: 8px;
+    --photo-g: 4px;
+    --text-p: .2em;
+
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.lesson-card {
+    border: 1px solid #e0e0e000;
+    border-radius: var(--card-m);
+    box-sizing: border-box;
+    margin: var(--card-m);
+    transition: background-color 300ms, border-color 300ms;
+    width: var(--card-w);
+}
+
+.lesson-card:hover {
+    background-color: #f8f8f8;
+    border-color: #e8e8e8;
+}
+
+.empty-card {
+    height: 0;
+    margin: 0 var(--card-m);
+    width: var(--card-w);
+}
+
+.lesson-card > .photos {
+    border-radius: var(--card-m);
+    box-sizing: border-box;
+    height: 144px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.lesson-card > .photos > .photo {
+    background-color: #eeeeee;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    width: calc(50% - var(--photo-g) / 2);
+}
+
+.lesson-card > .photos > .photo.left {
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.lesson-card > .photos > .photo.right {
+    height: calc(50% - var(--photo-g) / 2);
+    right: 0;
+}
+
+.lesson-card > .photos > .photo.top.right {
+    top: 0;
+}
+
+.lesson-card > .photos > .photo.bottom.right {
+    bottom: 0;
+}
+
+.lesson-card > .photos > .photo > .overlay {
+    background-color: #ffffff10;
+    height: 100%;
+    transition: background-color 300ms;
+    width: 100%;
+}
+
+.lesson-card:hover > .photos > .photo > .overlay {
+    background-color: #00000018;
+}
+
+.lesson-card > .title {
+    padding-left: var(--text-p);
+    padding-right: var(--text-p);
+    padding-top: .25em;
+}
+
+.lesson-card > .words-count {
+    color: #888;
+    font-size: .8 em;
+    padding-bottom: var(--text-p);
+    padding-left: var(--text-p);
+    padding-right: var(--text-p);
+    transition: color 300ms;
+}
+
+.lesson-card:hover > .words-count {
+    color: #777;
+    font-size: .8 em;
+}
+
+#github-link-wr {
     align-items: center;
     display: flex;
     justify-content: center;
+    padding-bottom: 1em;
 }
 
-#select-lesson {
-    font-size: 1.7em;
-}
-
-#select-lesson > a {
+#github-link-wr > a {
     display: block;
-}
-
-#github-link {
-    bottom: 2em;
-    position: absolute;
 }
 
 @property --alpha {
@@ -23,13 +115,13 @@ body {
     initial-value: 0;
 }
 
-#github-link > a > svg {
+#github-link-wr > a > svg {
     filter: drop-shadow(0 0 .4em rgba(0, 0, 0, var(--alpha)));
     height: 1.2em;
     transition: height 200ms, --alpha 200ms;
 }
 
-#github-link > a > svg:hover {
+#github-link-wr > a > svg:hover {
     --alpha: .4;
     height: 1.3em;
 }
