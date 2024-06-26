@@ -1,14 +1,14 @@
 #select-lesson {
     --card-w: 320px;
-    --card-m: 8px;
-    --photo-g: 4px;
+    --card-m: 6px;
+    --photo-g: 3px;
     --text-p: .2em;
 
 
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 1em;
+    margin-top: 2em;
 }
 
 .lesson-card {
@@ -23,6 +23,7 @@
 .lesson-card:hover {
     background-color: #f8f8f8;
     border-color: #e8e8e8;
+    text-decoration: none;
 }
 
 .empty-card {
@@ -34,9 +35,10 @@
 .lesson-card > .photos {
     border-radius: var(--card-m);
     box-sizing: border-box;
-    height: 144px;
+    height: 160px;
     overflow: hidden;
     position: relative;
+    text-decoration: none;
     width: 100%;
 }
 
@@ -102,7 +104,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
 }
 
 #github-link-wr > a {
