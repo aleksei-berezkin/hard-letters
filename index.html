@@ -26,7 +26,8 @@
         const name = lessonList[i].name
         const wordCount = lessonList[i].words.length
         const rem = wordCount % 10
-        const coverPicIds = shuffleArray(lessonList[i].words).slice(0, 3)
+        shuffleArray(lessonList[i].words)
+            .slice(0, 3)
             .flatMap(l => shuffleArray(l.filter(i => typeof i === 'number'))[0])
             .forEach((id, photoIndex) => {
                 getPhoto(id).then(photoObj => {
