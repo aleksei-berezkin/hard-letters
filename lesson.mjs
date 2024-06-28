@@ -1,4 +1,5 @@
 import { lessonList } from './lessonList.mjs';
+import { getUnseenAndMarkAsSeen } from './seen.mjs'
 import { getParams, onMusicVolumeInput } from './params.mjs';
 import { getPhoto, shuffleArray } from './util.mjs';
 
@@ -21,7 +22,7 @@ export async function runLesson(lessonId) {
     shuffleArray(animations);
     for (let i = 0; i < words.length; i++){
         const picIds = words[i].filter(w => typeof w === 'number')
-        const picId = picIds[Math.floor(Math.random() * picIds.length)]
+        const picId = getUnseenAndMarkAsSeen(picIds)
         const [picDesc, picDescSpoken] = words[i].filter(w => typeof w === 'string');
         const animation = animations[i % animations.length]
 
