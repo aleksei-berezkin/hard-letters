@@ -19,13 +19,13 @@
 
 <script type="module">
     import { lessonList } from './lessonList.mjs';
-    import { shuffleArray, getPhoto } from './util.mjs'
+    import { shuffleArray, getPhoto, decline } from './util.mjs'
 
     const selectLessons = document.querySelector('#select-lesson')
     for (let i = 0; i < lessonList.length; i++){
         const name = lessonList[i].name
         const wordCount = lessonList[i].words.length
-        const rem = wordCount % 10
+        const imgCount = lessonList[i].words.flatMap(w => w.filter(ww => typeof ww === 'number')).length
         shuffleArray(lessonList[i].words)
             .slice(0, 3)
             .flatMap(l => shuffleArray(l.filter(i => typeof i === 'number'))[0])
@@ -42,7 +42,7 @@
                     <div class='photo bottom right' id='photo_${i}_2'><div class='overlay'></div></div>
                 </div>
                 <div class='title'>${name}</div>
-                <div class='words-count'>${wordCount} ${rem === 1 ? 'слово' : ([2, 3, 4].includes(rem) ? 'слова' : 'слов')}</div>
+                <div class='words-count'>${wordCount} ${decline(wordCount, 'слово', 'слова', 'слов')} · ${imgCount} ${decline(imgCount, 'фотография', 'фотографии', 'фотографий')}</div>
             </a>
         `;
     }

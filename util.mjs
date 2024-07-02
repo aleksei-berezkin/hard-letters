@@ -14,3 +14,12 @@ export async function getPhoto(id) {
     const j = await res.json()
     return j['hits'][0]
 }
+
+
+export function decline(count, nom, gen, genP) {
+    const rem10 = count % 10
+    const rem100 = count % 100
+    if (11 <= rem100 && rem100 <= 14 || rem10 === 0 || rem10 >= 5) return genP
+    if (rem10 === 1) return nom
+    return gen
+}
