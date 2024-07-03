@@ -1,0 +1,91 @@
+#footer {
+    --p: 1em;
+
+    align-items: end;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    left: 0;
+    justify-content: space-between;
+    padding-bottom: var(--p);
+    padding-left: var(--p);
+    padding-right: var(--p);
+    position: absolute;
+    right: 0;
+}
+
+#sound-cloud-embed {
+    opacity: 50%;
+    flex: 1;
+    transition: opacity 0.3s;
+}
+
+#sound-cloud-embed > iframe {
+    border: none;
+    height: 80px;
+    transition: height 0.3s;
+}
+
+#sound-cloud-embed > * {
+    width: calc(min(300px, max(30vw, 150px)));
+}
+
+#sound-cloud-embed:hover {
+    opacity: 100%;
+}
+
+#sound-cloud-embed:hover > iframe {
+    height: 300px;
+}
+
+#description {
+    flex: 0;
+    font-size: 2em;
+    padding-left: .75em;
+    padding-right: .75em;
+    text-align: right;
+}
+
+#attribution {
+    flex: 1;
+    font-size: 1.1em;
+    text-align: right;
+}
+
+
+@media all and (max-width: 540px) {
+    #footer {
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    #footer > * {
+        flex: none;
+    }
+    #description {
+        order: 0;
+    }
+    #attribution {
+        order: 1;
+        padding-bottom: .25em;
+        text-align: center;
+    }
+    #sound-cloud-embed {
+        order: 2;
+        width: 100%;
+    }
+    #sound-cloud-embed > * {
+        margin-left: 5%;
+        width: 90%;
+    }
+}
+
+.overlay-text {
+    text-shadow:
+            #ffffff 0 0 .5em,
+            rgba(255, 255, 255, 0.5) 5px 0 .5em,
+            rgba(255, 255, 255, 0.5) 0 5px .5em,
+            rgba(255, 255, 255, 0.5) -5px 0 .5em,
+            rgba(255, 255, 255, 0.5) 0 -5px .5em;
+}

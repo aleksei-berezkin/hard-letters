@@ -10,8 +10,8 @@ const animations = [
     'slide-2-animation',
 ]
 
-const mainImg = document.getElementById('main-img')
-const descOverlay = document.getElementById('description-overlay')
+const mainImg = document.querySelector('#main-img')
+const descOverlay = document.querySelector('#description')
 const attribution = document.querySelector('#attribution')
 
 export async function runLesson(lessonId) {

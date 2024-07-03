@@ -1,10 +1,4 @@
 body {
-    --menu-bg: rgba(255, 255, 255, .5);
-    --menu-bg-h: rgba(255, 255, 255, .75);
-    --menu-p: 16px;
-    --menu-s: 32px;
-    --menu-sh: 3px 3px 10px rgba(0, 0, 0, 0.4);
-
     background-size: cover;
     background-position: 50% 50%;
     height: 100%;
@@ -83,73 +77,6 @@ body {
     }
 }
 
-
-#menu-btn {
-    background-color: var(--menu-bg);
-    border: 0;
-    border-radius: 50%;
-    box-shadow: var(--menu-sh);
-    cursor: pointer;
-    height: var(--menu-s);
-    left: var(--menu-p);
-    position: absolute;
-    top: var(--menu-p);
-    transition: background-color 200ms;
-    width: var(--menu-s);
-}
-
-#menu-btn:hover {
-    background-color: var(--menu-bg-h);
-}
-
-#menu-btn > svg {
-    --s: 24px;
-    --l: calc((var(--menu-s) - var(--s)) / 2);
-
-    height: var(--s);
-    left: var(--l);
-    position: absolute;
-    top: var(--l);
-    width: var(--s);
-}
-
-#params-wrapper {
-    background-color: var(--menu-bg);
-    border-radius: calc(var(--menu-s) / 4);
-    box-shadow: var(--menu-sh);
-    display: grid;
-    gap: .1em .5em;
-    grid-template-columns: auto auto;
-    left: var(--menu-p);
-    padding: calc(var(--menu-s) / 4);
-    position: absolute;
-    top: calc(var(--menu-p) * 2 + var(--menu-s));
-    transition: transform 200ms, opacity 200ms;
-    transform-origin: 0 0;
-    transform: scale(1)
-}
-
-#params-wrapper input {
-    width: 200px;
-}
-
-#params-wrapper.hidden {
-    transform: scale(0);
-    opacity: 0;
-}
-
-#default-wrapper {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    grid-column: span 2;
-}
-
-#default-wrapper button {
-    padding-left: .5em;
-    padding-right: .5em;
-}
-
 #app {
     align-items: center;
     backdrop-filter: blur(15px);
@@ -169,53 +96,6 @@ body {
     object-fit: contain;
     pointer-events: none;
 }
-
-#sound-cloud-embed {
-    position: absolute;
-    bottom: 1em;
-    left: 1em;
-    opacity: 50%;
-    transition: opacity 0.3s;
-}
-
-#sound-cloud-embed > iframe {
-    border: none;
-    height: 80px;
-    transition: height 0.3s, width 0.3s;
-    width: 250px;
-}
-
-#sound-cloud-embed:hover {
-    opacity: 100%;
-}
-
-#sound-cloud-embed:hover > iframe {
-    height: 300px;
-    width: 100%;
-}
-
-#description-overlay {
-    font-size: 2em;
-    position: absolute;
-    bottom: 1em;
-}
-
-#attribution {
-    bottom: 1em;
-    font-size: 1.1em;
-    position: absolute;
-    right: 1em;
-}
-
-.overlay-text {
-    text-shadow:
-            #ffffff 0 0 .5em,
-            rgba(255, 255, 255, 0.5) 5px 0 .5em,
-            rgba(255, 255, 255, 0.5) 0 5px .5em,
-            rgba(255, 255, 255, 0.5) -5px 0 .5em,
-            rgba(255, 255, 255, 0.5) 0 -5px .5em;
-}
-
 
 .enlarge-animation {
     animation: enlarge var(--tx) linear forwards;

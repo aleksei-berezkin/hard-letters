@@ -7,6 +7,8 @@
     <title>Hard letters</title>
     <link rel="stylesheet" href="css-global.css">
     <link rel="stylesheet" href="lesson.css">
+    <link rel="stylesheet" href="lesson-menu.css">
+    <link rel="stylesheet" href="lesson-footer.css">
     <script src="https://w.soundcloud.com/player/api.js"></script>
 </head>
 <body tabindex="0">
@@ -14,12 +16,15 @@
 <div id="app">
     <img id="main-img" alt=""/>
 
-    <div id="description-overlay" class="overlay-text"></div>
-    <div id="sound-cloud-embed">
-        <!--        <iframe id="sound-cloud-iframe" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/564463071&color=%237fb2d6&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/plastic3official" title="Plastic3" target="_blank" style="color: #cccccc; text-decoration: none;">Plastic3</a> · <a href="https://soundcloud.com/plastic3official/sets/happy-kids-pou-game-music" title="Happy Kids. Pou Game Music" target="_blank" style="color: #cccccc; text-decoration: none;">Happy Kids. Pou Game Music</a></div>-->
-        <iframe id="sound-cloud-iframe"  scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1446191623&color=%237fb2d6&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/audiopanda-music" title="Audiopanda" target="_blank" style="color: #cccccc; text-decoration: none;">Audiopanda</a> · <a href="https://soundcloud.com/audiopanda-music/sets/happy-kids-music-fun-cheerful" title="Happy Kids Music: Fun, Cheerful, Playful Instrumental Background Music" target="_blank" style="color: #cccccc; text-decoration: none;">Happy Kids Music: Fun, Cheerful, Playful Instrumental Background Music</a></div>
+    <div id="footer">
+        <div id="sound-cloud-embed">
+            <!--        <iframe id="sound-cloud-iframe" width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/564463071&color=%237fb2d6&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/plastic3official" title="Plastic3" target="_blank" style="color: #cccccc; text-decoration: none;">Plastic3</a> · <a href="https://soundcloud.com/plastic3official/sets/happy-kids-pou-game-music" title="Happy Kids. Pou Game Music" target="_blank" style="color: #cccccc; text-decoration: none;">Happy Kids. Pou Game Music</a></div>-->
+            <iframe id="sound-cloud-iframe"  scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1446191623&color=%237fb2d6&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/audiopanda-music" title="Audiopanda" target="_blank" style="color: #cccccc; text-decoration: none;">Audiopanda</a> · <a href="https://soundcloud.com/audiopanda-music/sets/happy-kids-music-fun-cheerful" title="Happy Kids Music: Fun, Cheerful, Playful Instrumental Background Music" target="_blank" style="color: #cccccc; text-decoration: none;">Happy Kids Music: Fun, Cheerful, Playful Instrumental Background Music</a></div>
+        </div>
+        <div id="description" class="overlay-text"></div>
+        <div id="attribution" class="overlay-text"></div>
     </div>
-    <div id="attribution" class="overlay-text"></div>
 </div>
 
 <svg id="loading-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
