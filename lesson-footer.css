@@ -1,23 +1,36 @@
 #footer {
-    --p: 1em;
-
     align-items: end;
     bottom: 0;
     display: flex;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     flex-direction: row;
-    left: 0;
     justify-content: space-between;
-    padding-bottom: var(--p);
-    padding-left: var(--p);
-    padding-right: var(--p);
+    left: 0;
+    padding-bottom: .8em;
+    padding-left: .8em;
+    padding-right: .8em;
     position: absolute;
     right: 0;
 }
 
+#attribution {
+    flex: 1;
+    font-size: calc(max(.8em, min(1.1em, 2.2vw)));
+}
+
+#description {
+    flex: 0;
+    font-size: calc(max(1.2em, min(2em, 4vw)));
+    padding-left: .75em;
+    padding-right: .75em;
+    text-align: center;
+}
+
+
 #sound-cloud-embed {
     opacity: 50%;
     flex: 1;
+    text-align: right;
     transition: opacity 0.3s;
 }
 
@@ -28,6 +41,7 @@
 }
 
 #sound-cloud-embed > * {
+    display: inline-block;
     width: calc(min(300px, max(30vw, 150px)));
 }
 
@@ -39,45 +53,35 @@
     height: 300px;
 }
 
-#description {
-    flex: 0;
-    font-size: 2em;
-    padding-left: .75em;
-    padding-right: .75em;
-    text-align: right;
-}
 
-#attribution {
-    flex: 1;
-    font-size: 1.1em;
-    text-align: right;
-}
-
-
-@media all and (max-width: 540px) {
+@media all and (max-width: 500px) {
     #footer {
         align-items: center;
         flex-direction: column;
         flex-wrap: nowrap;
+        padding-bottom: .2em;
+        padding-left: 0;
+        padding-right: 0;
     }
     #footer > * {
         flex: none;
     }
     #description {
-        order: 0;
+        order: -1;
+        padding: 0;
     }
     #attribution {
-        order: 1;
         padding-bottom: .25em;
         text-align: center;
     }
     #sound-cloud-embed {
-        order: 2;
+        text-align: initial;
         width: 100%;
     }
     #sound-cloud-embed > * {
-        margin-left: 5%;
-        width: 90%;
+        --w: calc(min(300px, 90%));
+        margin-left: calc(50% - var(--w) / 2);
+        width: var(--w);
     }
 }
 
