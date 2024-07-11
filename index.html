@@ -18,17 +18,17 @@
 </div>
 
 <script type="module">
-    import { lessonList } from './lessonList.mjs';
+    import { lessonList, parseWord } from './lessonList.mjs';
     import { shuffleArray, getPhoto, decline } from './util.mjs'
 
     const selectLessons = document.querySelector('#select-lesson')
     for (let i = 0; i < lessonList.length; i++){
         const name = lessonList[i].name
         const wordCount = lessonList[i].words.length
-        const imgCount = lessonList[i].words.flatMap(w => w.filter(ww => typeof ww === 'number')).length
+        const imgCount = lessonList[i].words.flatMap(w => parseWord(w).ids).length
         shuffleArray(lessonList[i].words)
             .slice(0, 3)
-            .flatMap(l => shuffleArray(l.filter(i => typeof i === 'number'))[0])
+            .flatMap(w => shuffleArray(parseWord(w).ids)[0])
             .forEach((id, photoIndex) => {
                 getPhoto(id).then(photoObj => {
                     document.querySelector(`#photo_${i}_${photoIndex}`).style.backgroundImage = `url(${photoObj.webformatURL.replace('_640', '_180')})`

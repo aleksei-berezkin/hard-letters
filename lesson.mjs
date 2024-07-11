@@ -1,4 +1,4 @@
-import { lessonList } from './lessonList.mjs';
+import { lessonList, parseWord } from './lessonList.mjs';
 import { getUnseenAndMarkAsSeen } from './seen.mjs'
 import { getParams, onMusicVolumeInput } from './params.mjs';
 import { getPhoto, shuffleArray } from './util.mjs';
@@ -21,9 +21,8 @@ export async function runLesson(lessonId) {
     shuffleArray(words);
     shuffleArray(animations);
     for (let i = 0; i < words.length; i++){
-        const picIds = words[i].filter(w => typeof w === 'number')
-        const picId = getUnseenAndMarkAsSeen(picIds)
-        const [picDesc, picDescSpoken] = words[i].filter(w => typeof w === 'string');
+        const {descr, spoken, ids} = parseWord(words[i])
+        const picId = getUnseenAndMarkAsSeen(ids)
         const animation = animations[i % animations.length]
 
         const photoObj = await getPhoto(picId)
@@ -37,17 +36,15 @@ export async function runLesson(lessonId) {
 
         mainImg.className = animation + (animation.startsWith('slide') && Math.random() < .5 ? ' reverse-animation' : '');
         document.body.style.backgroundImage = `url(${imgUrl})`
-        descOverlay.innerHTML = picDesc
+        descOverlay.innerHTML = descr
 
         const userName = photoObj['user']
         const userLink = `https://pixabay.com/users/${userName}`
         attribution.innerHTML = `Фото <a href='${userLink}' target='_blank'>${userName}</a> на <a href='${photoObj['pageURL']}' target='_blank'>Pixabay</a>`
 
-        const toSpeak = picDescSpoken ?? picDesc
-        speak(toSpeak)
+        speak(spoken)
 
-
-        await delayBetweenSlides(toSpeak.split(/[- ]/).length)
+        await delayBetweenSlides(spoken.split(/[- ]/).length)
         await delayUntilPauseEnd()
     }
 
