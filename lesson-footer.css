@@ -28,9 +28,11 @@
 
 
 #sound-cloud-embed {
+    align-items: end;
     opacity: 50%;
+    display: flex;
     flex: 1;
-    text-align: right;
+    flex-direction: column;
     transition: opacity 0.3s;
 }
 
@@ -41,7 +43,6 @@
 }
 
 #sound-cloud-embed > * {
-    display: inline-block;
     width: calc(min(300px, max(30vw, 150px)));
 }
 
@@ -75,7 +76,7 @@
         text-align: center;
     }
     #sound-cloud-embed {
-        text-align: initial;
+        display: initial;
         width: 100%;
     }
     #sound-cloud-embed > * {
