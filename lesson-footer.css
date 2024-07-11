@@ -1,29 +1,24 @@
 #footer {
     align-items: end;
     bottom: 0;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    gap: .75em;
+    grid-template-columns: 1fr fit-content(37vw) 1fr;
     left: 0;
-    padding-bottom: .8em;
-    padding-left: .8em;
-    padding-right: .8em;
+    padding: 0 .8em .8em .8em;
     position: absolute;
     right: 0;
 }
 
 #attribution {
-    flex: 1;
-    font-size: calc(max(.8em, min(1.1em, 2.2vw)));
+    font-size: calc(max(.8em, min(1.1em, 2vw)));
+    margin-bottom: .25em;
 }
 
 #description {
-    flex: 0;
-    font-size: calc(max(1.2em, min(2em, 4vw)));
-    padding-left: .75em;
-    padding-right: .75em;
+    font-size: calc(max(1.2em, min(2em, 3.5vw)));
     text-align: center;
+    text-wrap: wrap;
 }
 
 
@@ -31,7 +26,6 @@
     align-items: end;
     opacity: 50%;
     display: flex;
-    flex: 1;
     flex-direction: column;
     transition: opacity 0.3s;
 }
@@ -39,6 +33,7 @@
 #sound-cloud-embed > iframe {
     border: none;
     height: 80px;
+    margin-bottom: .25em;
     transition: height 0.3s;
 }
 
@@ -60,29 +55,27 @@
         align-items: center;
         flex-direction: column;
         flex-wrap: nowrap;
+        display: flex;
+        gap: .2em;
         padding-bottom: .2em;
         padding-left: 0;
         padding-right: 0;
     }
     #footer > * {
-        flex: none;
+        margin: 0;
     }
     #description {
         order: -1;
-        padding: 0;
     }
     #attribution {
-        padding-bottom: .25em;
         text-align: center;
     }
     #sound-cloud-embed {
-        display: initial;
+        align-items: center;
         width: 100%;
     }
     #sound-cloud-embed > * {
-        --w: calc(min(300px, 90%));
-        margin-left: calc(50% - var(--w) / 2);
-        width: var(--w);
+        width: calc(min(300px, 90%));
     }
 }
 
