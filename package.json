@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "main": "index.html",
   "scripts": {
-    "serve": "npx serve .",
+    "dev": "node checkDuplicates.mjs && npx serve .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

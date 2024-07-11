@@ -483,22 +483,3 @@ export function parseWord(word) {
     const ids = word.filter(it => typeof it === 'number')
     return {descr, spoken, ids}
 }
-
-function checkDuplicates() {
-    const idToDescr = new Map()
-    for (const l of lessonList) {
-        for (const w of l.words) {
-            const {descr, ids} = parseWord(w)
-            for (const id of ids) {
-                if (idToDescr.has(id)) {
-                    console.warn('Duplicate id=' + id + ' descr1=' + idToDescr.get(id) + ' descr2=' + descr)
-                }
-                else {
-                    idToDescr.set(id, descr)
-                }
-            }
-        }
-    }
-}
-
-checkDuplicates()
