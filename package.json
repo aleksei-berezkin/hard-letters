@@ -6,8 +6,8 @@
   "version": "1.0.0",
   "main": "index.html",
   "scripts": {
-    "dev": "node checkDuplicates.mjs && npx serve .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run test && npx serve .",
+    "test": "node checkDuplicates.mjs"
   },
   "devDependencies": {
     "serve": "^14.2.3"
