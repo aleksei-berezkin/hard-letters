@@ -1,4 +1,4 @@
-import { lessonList, parseWord } from './lessonList.mjs'
+import { lessonList, parseWord } from './public/lessonList.mjs'
 
 const descrToLesson = new Map()
 const idToDescr = new Map()
