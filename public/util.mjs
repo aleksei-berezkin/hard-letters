@@ -25,19 +25,9 @@ export function getPicUrl(size, id) {
 }
 
 export async function getInfo(id) {
-    // TODO just change to json
-
-    if (window.location.hostname === 'localhost') {
-        const path = `/pics/info/${id}.mjs`
-        const {user, pageURL} = await import(path)
-        return {user, pageURL}
-    }
-
-    // Cannot import() because Github responds with a MIME type "text/plain"
-    return await (async function() {
-        const path = `https://raw.githubusercontent.com/aleksei-berezkin/hard-letters/main/pics/info/${id}.mjs`
-        const text = await (await fetch(path)).text()
-        eval(text.replace(/export const/g, ''))
-        return {user, pageURL}
-    })()
+    const url = window.location.hostname === 'localhost'
+        ? `/pics/info/${id}.json`
+        : `https://raw.githubusercontent.com/aleksei-berezkin/hard-letters/main/pics/info/${id}.json`
+    const {user, pageURL} = await (await fetch(url)).json()
+    return {user, pageURL}
 }

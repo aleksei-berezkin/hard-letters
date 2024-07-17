@@ -16,7 +16,7 @@ const infosToRemove = subtract(existingInfoIds, requiredIds)
 console.log(`To remove: ${smallIdsToRemove.size} 'small', ${largeIdsToRemove.size} 'large', ${infosToRemove.size} 'info'`)
 removeFiles('small', 'jpg', smallIdsToRemove)
 removeFiles('large', 'jpg', largeIdsToRemove)
-removeFiles('info', 'mjs', infosToRemove)
+removeFiles('info', 'json', infosToRemove)
 console.log('Done remove')
 
 const smallIdsToDownload = subtract(requiredIds, existingSmallIds)
@@ -25,10 +25,17 @@ const infosToDownload = subtract(requiredIds, existingInfoIds)
 
 console.log(`To download: ${smallIdsToDownload.size} 'small', ${largeIdsToDownload.size} 'large', ${infosToDownload.size} 'info'`)
 
+const allIds = union(smallIdsToDownload, largeIdsToDownload, infosToDownload)
+let remainingIds = allIds.size
+
+const progressInterval = setInterval(function() {
+    console.log(`Remaining ids: ${remainingIds}`)
+}, 5000)
+
 const promises = new Set()
 const maxPromises = 3
 
-for (const id of union(smallIdsToDownload, largeIdsToDownload, infosToDownload)) {
+for (const id of allIds) {
     while (promises.size >= maxPromises) {
         await Promise.race(promises)
     }
@@ -45,6 +52,7 @@ for (const id of union(smallIdsToDownload, largeIdsToDownload, infosToDownload))
         if (infosToDownload.has(id)) {
             writeInfo(id, user, pageURL)
         }
+        remainingIds--
         promises.delete(promise)
     })()
     promises.add(promise)
@@ -52,6 +60,7 @@ for (const id of union(smallIdsToDownload, largeIdsToDownload, infosToDownload))
 
 while (promises.size) {
     await Promise.all(promises)
+    clearInterval(progressInterval)
 }
 
 console.log('All done')
@@ -77,7 +86,7 @@ function getExistingIds(size) {
 function getExistingInfoIds() {
     return new Set(
         fs.readdirSync(`pics/info`)
-            .map(n => Number(/(\w+)\.mjs/.exec(n)[1]))
+            .map(n => Number(/(\w+)\.json/.exec(n)[1]))
     )
 }
 
@@ -130,11 +139,10 @@ async function download(url, path) {
 }
 
 async function writeInfo(id, user, pageURL) {
-    const path = `pics/info/${id}.mjs`
+    const path = `pics/info/${id}.json`
     fs.writeFileSync(
         path,
-        `export const user = '${user}'\n` +
-        `export const pageURL = '${pageURL}'\n`
+        JSON.stringify({user, pageURL})
     )
     console.log(`Wrote info ${path}`)
 }
