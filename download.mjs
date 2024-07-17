@@ -60,9 +60,9 @@ for (const id of allIds) {
 
 while (promises.size) {
     await Promise.all(promises)
-    clearInterval(progressInterval)
 }
 
+clearInterval(progressInterval)
 console.log('All done')
 
 // *** util ***
