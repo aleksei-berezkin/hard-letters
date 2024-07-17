@@ -1,7 +1,7 @@
 import { lessonList, parseWord } from './lessonList.mjs';
 import { getUnseenAndMarkAsSeen } from './seen.mjs'
 import { getParams, onMusicVolumeInput } from './params.mjs';
-import { shuffleArray, delay, getPicUrl } from './util.mjs';
+import { shuffleArray, delay, getPicUrl, getInfo } from './util.mjs';
 
 const animations = [
     'enlarge-animation',
@@ -37,11 +37,9 @@ export async function runLesson(lessonId) {
         document.body.style.backgroundImage = `url(${imgUrl})`
         descOverlay.innerHTML = descr
 
-        // const userName = photoObj['user']
-        // const userLink = `https://pixabay.com/users/${userName}`
-        // attribution.innerHTML = `Фото <a href='${userLink}' target='_blank'>${userName}</a> на <a href='${photoObj['pageURL']}' target='_blank'>Pixabay</a>`
-
-        attribution.innerHTML = `Фото на <a href='https://pixabay.com/' target='_blank'>Pixabay</a>`
+        const {user, pageURL} = await getInfo(picId)
+        const userLink = `https://pixabay.com/users/${user}`
+        attribution.innerHTML = `Фото <a href='${userLink}' target='_blank'>${user}</a> на <a href='${pageURL}' target='_blank'>Pixabay</a>`
 
         speak(spoken)
 

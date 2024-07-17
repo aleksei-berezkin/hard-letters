@@ -1,3 +1,6 @@
 {
-    "cleanUrls": ["/"]
+    "cleanUrls": false,
+    "redirects": [
+        { "source": "/", "destination": "/public/index.html" }
+    ]
 }

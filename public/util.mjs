@@ -23,3 +23,11 @@ export function getPicUrl(size, id) {
         ? `/pics/${size}/${id}.jpg`
         : `https://raw.githubusercontent.com/aleksei-berezkin/hard-letters/main/pics/${size}/${id}.jpg`
 }
+
+export async function getInfo(id) {
+    const path = window.location.hostname === 'localhost'
+        ? `/pics/info/${id}.mjs`
+        : `https://raw.githubusercontent.com/aleksei-berezkin/hard-letters/main/pics/info/${id}.mjs`
+    const {user, pageURL} = await import(path)
+    return {user, pageURL}
+}
