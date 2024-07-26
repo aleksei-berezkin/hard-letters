@@ -6,9 +6,8 @@
   "version": "1.0.0",
   "main": "index.html",
   "scripts": {
-    "download": "npm test && node download.mjs",
     "start": "npm test && npx serve .",
-    "test": "node checkDuplicates.mjs"
+    "test": "node checkDuplicates.mjs && node download.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
