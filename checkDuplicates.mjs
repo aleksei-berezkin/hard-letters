@@ -1,4 +1,13 @@
-import { lessonList, parseWord } from './public/lessonList.mjs'
+import { verbs1, verbs2, lessonList, parseWord } from './public/lessonList.mjs'
+
+const allVerbsIds = new Set()
+for (const v of [...verbs1, ...verbs2]) {
+    for (const id of v.slice(2)) {
+        if (typeof id !== 'number')
+            throw new Error(`Id is not a number: ${id} in word ${v[0]}`)
+        allVerbsIds.add(id)
+    }
+}
 
 const descrToLesson = new Map()
 const idToDescr = new Map()
@@ -16,7 +25,7 @@ for (const l of lessonList) {
         }
 
         for (const id of ids) {
-            if (idToDescr.has(id)) {
+            if (idToDescr.has(id) && !allVerbsIds.has(id)) {
                 msg.push(`Duplicate id: ${id} descr1: ${idToDescr.get(id)} descr2: ${descr}`)
             }
             else {
